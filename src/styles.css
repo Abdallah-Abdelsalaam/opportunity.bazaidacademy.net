@@ -1,0 +1,348 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Bazaid Academy — Qudrat landing design system.
+ * Brand: deep navy + academy blue/teal, gold accent. Font: Tajawal.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --font-sans: "Tajawal", system-ui, sans-serif;
+  --font-display: "Tajawal", system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+}
+
+:root {
+  --radius: 1rem;
+
+  --background: oklch(0.185 0.052 258);
+  --foreground: oklch(0.97 0.008 240);
+
+  --surface: oklch(0.24 0.06 257);
+  --surface-2: oklch(0.29 0.065 250);
+
+  --card: oklch(0.245 0.06 257);
+  --card-foreground: oklch(0.97 0.008 240);
+  --popover: oklch(0.235 0.058 257);
+  --popover-foreground: oklch(0.97 0.008 240);
+
+  --primary: oklch(0.62 0.13 235);
+  --primary-foreground: oklch(0.99 0.005 240);
+
+  --secondary: oklch(0.32 0.07 253);
+  --secondary-foreground: oklch(0.97 0.008 240);
+
+  --muted: oklch(0.3 0.05 253);
+  --muted-foreground: oklch(0.76 0.03 246);
+
+  --accent: oklch(0.7 0.11 210);
+  --accent-foreground: oklch(0.18 0.05 258);
+
+  --gold: oklch(0.82 0.13 200);
+  --gold-foreground: oklch(0.2 0.05 258);
+
+  --destructive: oklch(0.62 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.38 0.055 252 / 55%);
+  --input: oklch(0.38 0.055 252 / 55%);
+  --ring: oklch(0.65 0.12 232);
+
+  --gradient-brand: linear-gradient(135deg, oklch(0.55 0.13 238), oklch(0.68 0.11 210));
+  --gradient-deep: linear-gradient(180deg, oklch(0.185 0.052 258), oklch(0.24 0.065 252));
+  --gradient-gold: linear-gradient(135deg, oklch(0.88 0.12 195), oklch(0.66 0.14 240));
+  --shadow-glow: 0 24px 70px -24px oklch(0.62 0.13 235 / 60%);
+  --shadow-card: 0 18px 50px -22px oklch(0.1 0.05 258 / 85%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--gradient-deep);
+    background-attachment: fixed;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Keep the full character face, chin, and academy mark visible in the mobile hero. */
+@utility hero-main-video {
+  inset: 0;
+  height: 100%;
+  object-position: center top;
+
+  @media (max-width: 640px) {
+    top: -7.5rem;
+    bottom: auto;
+    height: auto;
+    min-height: calc(100svh + 7.5rem);
+    object-position: center top;
+  }
+}
+
+@utility brand-gradient-text {
+  display: inline-block;
+  padding-block: 0.14em;
+  margin-block: -0.14em;
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  color: transparent;
+}
+
+@utility gold-gradient-text {
+  display: inline-block;
+  padding-block: 0.14em;
+  margin-block: -0.14em;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  color: transparent;
+}
+
+/* Prevent Arabic dots and diacritics from being clipped on Android browsers. */
+@utility arabic-title-safe {
+  overflow: visible;
+  padding-block: 0.16em;
+  text-rendering: geometricPrecision;
+}
+
+@utility surface-card {
+  background: color-mix(in oklab, var(--surface) 88%, transparent);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(8px);
+}
+
+@utility reveal {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility marquee-track {
+  animation: marquee 38s linear infinite;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@utility floaty {
+  animation: floaty 7s ease-in-out infinite;
+}
+
+@utility title-shape {
+  position: relative;
+  border-radius: 999px;
+  border: 2px solid oklch(0.8 0.13 200 / 90%);
+  background: linear-gradient(135deg, oklch(0.32 0.08 240), oklch(0.26 0.07 250));
+  color: oklch(0.98 0.01 220);
+  letter-spacing: 0;
+  box-shadow:
+    0 0 0 1px oklch(0.78 0.12 200 / 20%),
+    0 22px 60px -24px oklch(0.7 0.13 215 / 65%),
+    inset 0 1px 0 oklch(0.9 0.05 220 / 18%);
+  backdrop-filter: blur(8px);
+}
+
+@utility big-score {
+  display: inline-block;
+  font-weight: 900;
+  line-height: 0.95;
+  font-size: clamp(3.5rem, 12vw, 8rem);
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 10px 30px oklch(0.7 0.13 215 / 45%));
+}
+
+@keyframes orb-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -30px, 0) scale(1.08);
+  }
+}
+
+@utility orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(60px);
+  opacity: 0.35;
+  pointer-events: none;
+  animation: orb-drift 14s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@utility shine-cta {
+  background-image: var(--gradient-brand);
+  background-size: 200% 100%;
+  animation: shimmer 6s linear infinite;
+}
+
+/* ===== Confetti + button feedback ===== */
+@keyframes confetti-burst {
+  0% {
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    transform:
+      translate3d(
+        calc(-50% + cos(var(--angle, 0deg)) * var(--distance, 120px)),
+        calc(-50% + sin(var(--angle, 0deg)) * var(--distance, 120px)),
+        0
+      )
+      rotate(340deg);
+    opacity: 0;
+  }
+}
+
+.confetti-piece {
+  position: absolute;
+  top: 0;
+  border-radius: 2px;
+  animation-name: confetti-burst;
+  animation-timing-function: cubic-bezier(0.22, 0.8, 0.36, 1);
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes pop-answer {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.14);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.answer-pop {
+  animation: pop-answer 0.45s ease-out;
+}
+
+@keyframes shake-answer {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+
+.answer-shake {
+  animation: shake-answer 0.35s ease-in-out;
+}
+
+button,
+a[role="button"] {
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+button:active,
+a[role="button"]:active {
+  transform: scale(0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .confetti-piece,
+  .answer-pop,
+  .answer-shake {
+    animation: none !important;
+  }
+}
